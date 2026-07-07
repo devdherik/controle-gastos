@@ -16,6 +16,6 @@ public class PessoasController : ControllerBase
     // injeção de dependencia
     public PessoasController(AppDbContext context)
     {
-        _context = context
+        _context = context;
     }
 }
