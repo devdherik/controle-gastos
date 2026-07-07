@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace backend.Controllers;
 
 [ApiController]
-[Route("controller")]
+[Route("transacoes")]
 public class TransacoesController : ControllerBase
 {
     private readonly AppDbContext _context;

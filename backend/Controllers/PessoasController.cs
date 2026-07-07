@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Data;
 using backend.Models;
+using Microsoft.VisualBasic;
 
 namespace backend.Controllers;
 
@@ -68,6 +69,51 @@ public class PessoasController : ControllerBase
 
         return NoContent();
     }
+
+    //get para pessoas e seus totais '/pessoas/totais
+    [HttpGet("totais")]
+    public async Task<ActionResult> ConsultarTotais()
+    {
+        var pessoas = await _context.Pessoas
+            .Include(p => p.Transacoes)
+            .ToListAsync();
+
+        var relatorioPorPessoa = pessoas.Select(p =>
+        {
+            var totalReceitas = p.Transacoes
+                .Where(t => t.Tipo == TipoTransacao.Receita)
+                .Sum(t => t.Valor);
+
+            var totalDespesas = p.Transacoes
+                .Where(t => t.Tipo == TipoTransacao.Despesa)
+                .Sum(t => t.Valor);
+            
+            return new
+            {
+                p.Id,
+                p.Nome,
+                TotalReceitas = totalReceitas,
+                TotalDespesas = totalDespesas,
+                Saldo = totalReceitas - totalDespesas
+            };
+        }).ToList();
+
+        var TotalGeralReceitas = relatorioPorPessoa.Sum(p => p.TotalReceitas);
+        var TotalGeralDespesas = relatorioPorPessoa.Sum(p => p.TotalDespesas);
+
+        return Ok(new
+        {
+            Pessoas = relatorioPorPessoa,
+            TotalGeral = new
+            {
+                TotalReceitas = TotalGeralReceitas,
+                TotalDespesas = TotalGeralDespesas,
+                Saldo = TotalGeralReceitas - TotalGeralDespesas
+            }
+        });
+
+    }
+
 
 }
 
