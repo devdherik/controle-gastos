@@ -14,4 +14,7 @@ public class Pessoa
 
     [Range(0, 150, ErrorMessage = "A idade deve estar entre 0 e 150 anos")]
     public int Idade { get; set; }
+
+    //aqui, uma pessoa tem suas transações. então, podemos escrever: pessoa.Transacoes
+    public List<Transacao> Transacoes { get; set; } = [];
 }
