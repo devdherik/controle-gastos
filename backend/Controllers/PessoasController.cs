@@ -5,6 +5,8 @@ using backend.Models;
 
 namespace backend.Controllers;
 
+
+//o apicontroller faz o asp.net validar automaticamente os data annotations, como os do 'pessoas.cs'
 [ApiController]
 [Route("pessoas")]
 
@@ -23,7 +25,7 @@ public class PessoasController : ControllerBase
 
 
     //métodos:
-    
+
     [HttpGet]
     public async Task<ActionResult<List<Pessoa>>> ListarPessoas()
     {
@@ -48,6 +50,23 @@ public class PessoasController : ControllerBase
             nameof(ListarPessoas),
             new { id = pessoa.Id },
             pessoa);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> ExcluirPessoa(int id)
+    {
+        var pessoa = await _context.Pessoas.FindAsync(id);
+
+        if (pessoa == null)
+        {
+            return NotFound();
+        }
+
+        _context.Pessoas.Remove(pessoa);
+
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
 
 }
