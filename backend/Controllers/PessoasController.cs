@@ -22,13 +22,32 @@ public class PessoasController : ControllerBase
     }
 
 
-    //método
+    //métodos:
+    
     [HttpGet]
     public async Task<ActionResult<List<Pessoa>>> ListarPessoas()
     {
         var pessoas = await _context.Pessoas.ToListAsync();
 
         return Ok(pessoas);
+    }
+
+    [HttpPost]
+    //aqui eu já nao usei o '<list pessoas> pois não estou devolvendo uma lista, estou enviando apenas uma pessoa, ja que estou cadastrando apenas uma pessoa com (POST)
+    public async Task<ActionResult<Pessoa>> CriarPessoa([FromBody] Pessoa pessoa)
+    {
+        _context.Pessoas.Add(pessoa);
+
+
+        //aqui, depois dessa linha, o entityframework atualiza o objeto automaticamente, ou seja, atualiza o id.
+        await _context.SaveChangesAsync();
+
+
+        //aqui, nao usei o Ok() pq quando crio um recurso novo, tipo esse de retornar alguem, o ideal não é voltar um OK 200, e sim um '201 Created'. 
+        return CreatedAtAction(
+            nameof(ListarPessoas),
+            new { id = pessoa.Id },
+            pessoa);
     }
 
 }
