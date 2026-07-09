@@ -15,7 +15,7 @@ export async function listarPessoas(): Promise<Pessoa[]> {
 
 //post
 export async function criarPessoa(pessoa: Omit<Pessoa, "id">): Promise<Pessoa> {
-    const resposta = await fetch (`${API_URL}/pessoa`, {
+    const resposta = await fetch (`${API_URL}/pessoas`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
