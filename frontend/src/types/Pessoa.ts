@@ -1,5 +1,5 @@
 export interface Pessoa {
-    id: Number
+    id:number
     nome: string
     idade: number
 }
