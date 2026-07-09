@@ -38,7 +38,7 @@ public class TransacoesController : ControllerBase
 
         await _context.SaveChangesAsync();
 
-        return Ok("Transação cadastrada com sucesso!");
+        return Ok(transacao);
 
     }
 
