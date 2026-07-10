@@ -25,13 +25,13 @@ public class TransacoesController : ControllerBase
 
         if (pessoa == null)
         {
-            return NotFound("Pessoa não encontrada.");
+            return NotFound(new { mensagem = "Pessoa não encontrada." });
         }
 
         //aqui é a regra que o problema exige
         if (pessoa.Idade < 18 && transacao.Tipo == TipoTransacao.Receita)
         {
-            return BadRequest("Pessoas menores de idade só podem cadastrar despesas");
+            return BadRequest( new { mensagem = "Pessoas menores de idade só podem cadastrar despesas."} );
         }
 
         _context.Transacoes.Add(transacao);

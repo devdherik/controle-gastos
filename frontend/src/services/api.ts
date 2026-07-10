@@ -51,7 +51,13 @@ export async function criarTransacao(transacao: Omit<Transacao, "id">): Promise<
         },
         body: JSON.stringify(transacao),
     })
+
     const dados = await resposta.json()
+
+    if (!resposta.ok) {
+        throw new Error(dados.mensagem)
+    }
+
     return dados
 }
 

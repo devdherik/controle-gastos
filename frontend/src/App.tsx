@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
 import type { Pessoa } from "./types/Pessoa"
-import { listarPessoas, criarPessoa, deletarPessoa, listarTransacoes, criarTransacao } from "./services/api"
+import { listarPessoas, criarPessoa, deletarPessoa, listarTransacoes, criarTransacao, consultarTotais } from "./services/api"
 import  type { Transacao } from "./types/Transacao"
 import { TipoTransacao } from "./types/Transacao"
+import type { RelatorioTotais } from "./types/Relatorio"
 
 function App() {
   const [pessoas, setPessoas] = useState<Pessoa[]>([])
@@ -13,7 +14,9 @@ function App() {
   const [valor, setValor] = useState("")
   const [tipo, setTipo] = useState<TipoTransacao>(TipoTransacao.Despesa)
   const [pessoaId, setPessoaId] = useState("")
-
+  const [erroTransacao, setErroTransacao] = useState("")
+  // o | é uma união de objetos: objeto e null
+  const [relatorio, setRelatorio] = useState<RelatorioTotais | null>(null)
 
   //permite chamar a função em outros momentos, não so quando a tela é recarragada (juntando com o useeffect)
   function carregarPessoas() {
@@ -58,6 +61,13 @@ function App() {
       setPessoaId("")
       carregarTransacoes()
     })
+    .catch((erro) => {
+      setErroTransacao(erro.message)
+    })
+  }
+
+  function handleConsultarTotais() {
+    consultarTotais().then((dados) => setRelatorio(dados))
   }
 
 
@@ -77,7 +87,7 @@ function App() {
 
 
 
-
+  //aqui é o html dentro do typescript
   return (
     <div>
       <h1>Controle de Gastos Residenciais</h1>
@@ -135,6 +145,7 @@ function App() {
             </option>
           ))}
         </select>
+        {erroTransacao && <p style={{color: "red"}}>{erroTransacao}</p>}
         <button type="submit">Cadastrar Transação</button>
       </form>
 
@@ -147,6 +158,31 @@ function App() {
           </li>
         ))}
       </ul>
+
+      {/* chamar todas as transações e pessoas */}
+        
+      <button onClick={handleConsultarTotais}>Calcular Totais</button>
+        {relatorio && (
+          <div>
+            <h2>Totais por pessoa</h2>
+            <ul>
+              {relatorio.pessoas.map((pessoa) =>
+              <li key={pessoa.id}>
+                {pessoa.nome} - Receitas: R$ {pessoa.totalReceitas} | Despesas: R$ {pessoa.totalDespesas} | Saldo: R$ {pessoa.saldo}
+              </li>
+              )}
+            </ul>
+
+            <h2>Total Geral</h2>
+            <p>Receitas: R$ {relatorio.totalGeral.totalReceitas}</p>
+            <p>Despesas: R$ {relatorio.totalGeral.totalDespesas}</p>
+            <p>Saldo: R$ {relatorio.totalGeral.saldo}</p>
+
+          </div>
+        )}
+
+
+
     </div>
   )
 }
