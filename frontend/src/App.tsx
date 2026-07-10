@@ -99,6 +99,7 @@ function App() {
 
       {/* aqui ele chama a função que criei acima */}
       <form onSubmit={handleSubmitPessoa} className="card">
+        <h2 className="subtitulo">Cadastro de Pessoas</h2>
         <input
         type="text"
         placeholder="Nome"
@@ -118,7 +119,7 @@ function App() {
 
 
       <form onSubmit={handleSubmitTransacao} className="card">
-
+        <h2 className="subtitulo">Cadastro de Transações</h2>
         <input
           type="text"
           placeholder="Descrição"
