@@ -31,6 +31,8 @@ Existem duas regras principais: A primeira é que pessoas menores de idade podem
 
 
 ## 🚀 Como Executar
+Baixe e Extraia o .zip do repositório.
+
 Por dois terminais de comando, entre nas seguintes pastas, cada terminal em pasta e rode os comandos a seguir:
 ### Backend
 ```bash
