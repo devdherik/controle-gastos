@@ -31,6 +31,7 @@ Existem duas regras principais: A primeira é que pessoas menores de idade podem
 
 
 ## 🚀 Como Executar
+Por dois terminais de comando, entre nas seguintes pastas, cada terminal em pasta e rode os comandos a seguir:
 ### Backend
 ```bash
 cd backend
@@ -39,7 +40,7 @@ dotnet ef database update
 dotnet run
 ```
 ### Frontend
-```
+```bash
 cd frontend
 npm install
 npm run dev
