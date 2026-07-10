@@ -170,6 +170,19 @@ function App() {
         ))}
       </ul>
 
+      
+      <h2 className="subtitulo">Transações</h2>
+      <ul className="lista">
+        {transacoes.map((transacao) => (
+          <li key={transacao.id} className="item-lista">
+            <span className={transacao.tipo == TipoTransacao.Receita ? "tag-receita" : "tag-despesa"}>
+              {transacao.tipo == TipoTransacao.Receita ? "Receita" : "Despesa"}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+
       {/* chamar todas as transações e pessoas */}
         
       <button onClick={handleConsultarTotais} className="botao-primario">Calcular Totais</button>
