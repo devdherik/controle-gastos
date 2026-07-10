@@ -160,7 +160,7 @@ function App() {
         <button type="submit" className="botao-primario">Cadastrar Transação</button>
       </form>
 
-
+      <h2 className="subtitulo">Pessoas</h2>
       <ul className="lista">
         {pessoas.map((pessoa) => (
           <li key={pessoa.id} className="item-lista">
@@ -173,13 +173,17 @@ function App() {
       
       <h2 className="subtitulo">Transações</h2>
       <ul className="lista">
-        {transacoes.map((transacao) => (
-          <li key={transacao.id} className="item-lista">
-            <span className={transacao.tipo == TipoTransacao.Receita ? "tag-receita" : "tag-despesa"}>
-              {transacao.tipo == TipoTransacao.Receita ? "Receita" : "Despesa"}
-            </span>
-          </li>
-        ))}
+        {transacoes.map((transacao) => {
+          const pessoa = pessoas.find((p) => p.id === transacao.pessoaId)
+          return (
+            <li key={transacao.id} className="item-lista">
+              {pessoa?.nome} | {transacao.descricao} - R$ {transacao.valor}
+              <span className={transacao.tipo == TipoTransacao.Receita ? "tag-receita" : "tag-despesa"}>
+                {transacao.tipo == TipoTransacao.Receita ? "Receita" : "Despesa"}
+              </span>
+            </li>
+          )
+        })}
       </ul>
 
 
