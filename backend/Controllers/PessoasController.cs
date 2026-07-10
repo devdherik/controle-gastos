@@ -62,6 +62,7 @@ public class PessoasController : ControllerBase
             return NotFound();
         }
 
+        //se eu deleto a pessoa, deleto suas transações, via cascade configurada no migration
         _context.Pessoas.Remove(pessoa);
 
         await _context.SaveChangesAsync();

@@ -14,7 +14,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+//resolver o ciclo de pessoa - transacao
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -52,6 +52,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 app.UseCors("PermitirFrontend");

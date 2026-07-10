@@ -21,6 +21,7 @@ public class TransacoesController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Transacao>> CriarTransacao([FromBody] Transacao transacao)
     {
+        //aqui eu busco a pessoa antes de dar continuidade à criação da transação pq eu preciso da idade pra fazer a validação da regra do menor de idade
         var pessoa = await _context.Pessoas.FindAsync(transacao.PessoaId);
 
         if (pessoa == null)
@@ -38,6 +39,7 @@ public class TransacoesController : ControllerBase
 
         await _context.SaveChangesAsync();
 
+        
         return Ok(transacao);
 
     }

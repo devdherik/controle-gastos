@@ -1,3 +1,5 @@
+//centraliza a comunicação http com o backend
+
 import type { Pessoa } from "../types/Pessoa"
 import type { Transacao } from "../types/Transacao"
 import type { RelatorioTotais } from "../types/Relatorio"

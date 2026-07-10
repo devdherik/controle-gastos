@@ -1,3 +1,6 @@
+//arquivo que concentra a maioria das coisas e é o que aparece na tela do usuário
+
+
 import React, { useEffect, useState } from "react"
 import type { Pessoa } from "./types/Pessoa"
 import { listarPessoas, criarPessoa, deletarPessoa, listarTransacoes, criarTransacao, consultarTotais } from "./services/api"
@@ -34,6 +37,7 @@ function App() {
   function handleSubmitPessoa(evento: React.SubmitEvent) {
     evento.preventDefault()
 
+    //esse .then limpa o formulario e carrega a pessoa criada sem precisar atualizar a pagina
     criarPessoa({ nome, idade: Number(idade)}).then(() => {
       setNome("")
       setIdade("")
@@ -61,6 +65,7 @@ function App() {
       setPessoaId("")
       carregarTransacoes()
     })
+    //pega o erro e manda a mensagem la do back-end
     .catch((erro) => {
       setErroTransacao(erro.message)
     })
