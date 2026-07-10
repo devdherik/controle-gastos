@@ -45,6 +45,7 @@ cd frontend
 npm install
 npm run dev
 ```
+No Terminal do FRONTEND, acesse o link LocalHost que lá for gerado.
 
 ## 🔮 Melhorias Futuras
 
