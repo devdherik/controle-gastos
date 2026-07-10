@@ -69,6 +69,7 @@ Algumas funcionalidades que podem ser adicionadas em versões futuras do sistema
 
 ### 💭 Comentários:
 Esse foi um projeto muito desafiador pois o contato que tive com as tecnologias utilizadas havia sido muito raso até então. No entanto, apesar da pressão e do limite de tempo, acredito que aprimorei muito as minhas habilidades nas mesmas. Ao decorrer do desenvolvimento do projeto, fui aprendendo de forma aprofundada as funcionalidades e tecnologias. Consegui assimilar o a criação da plataforma com uma rotina de estudos fora do meio e fui capaz de entregar um resultado que me satisfez.
+
 Utilizei da inteligência Artificial (Claude [Plano Free] e Chat GPT [Free]) como tutora no andamento da criação, como consultora de bugs e erros que tive que ir ajustando no caminho e como conselheira do que fazer. Todas as linhas de código foram escritras estritamentes por mim, exceto nos arquivos que ja vinham preenchidos por padrão pelos Frameworks, como o arquivo 'Program.cs'. Nestes, só tive de ajustar algumas coisas, mas já vinham estruturados. Por fim, o código tem minuciosos detalhes que podem ser melhorados com o decorrer de um desenvolvimento futuro, mas com relação aos requisitos que estabeleci, está tudo ok.
 
 ### Autor:
