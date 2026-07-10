@@ -1,6 +1,6 @@
 //arquivo que concentra a maioria das coisas e é o que aparece na tela do usuário
 
-
+import "./App.css"
 import React, { useEffect, useState } from "react"
 import type { Pessoa } from "./types/Pessoa"
 import { listarPessoas, criarPessoa, deletarPessoa, listarTransacoes, criarTransacao, consultarTotais } from "./services/api"
@@ -94,34 +94,37 @@ function App() {
 
   //aqui é o html dentro do typescript
   return (
-    <div>
-      <h1>Controle de Gastos Residenciais</h1>
+    <div className="container">
+      <h1 className="titulo">Controle de Gastos Residenciais</h1>
 
       {/* aqui ele chama a função que criei acima */}
-      <form onSubmit={handleSubmitPessoa}>
+      <form onSubmit={handleSubmitPessoa} className="card">
         <input
         type="text"
         placeholder="Nome"
         value={nome} 
         onChange={(e) => setNome(e.target.value)}
+        className="campo"
         />
         <input
         type="number"
         placeholder="Idade"
         value={idade}
         onChange={(e) => setIdade(e.target.value)}
+        className="campo"
         />
-        <button type="submit">Cadastrar Pessoa</button>
+        <button type="submit" className="botao-primario">Cadastrar Pessoa</button>
       </form> 
 
 
-      <form onSubmit={handleSubmitTransacao}>
+      <form onSubmit={handleSubmitTransacao} className="card">
 
         <input
           type="text"
           placeholder="Descrição"
           value={descricao}
           onChange={(e) => setDescricao(e.target.value)}
+          className="campo"
         />
 
         <input
@@ -129,11 +132,13 @@ function App() {
         placeholder="Valor"
         value={valor}
         onChange={(e => setValor(e.target.value))}
+        className="campo"
         />
 
         <select
         value={tipo}
         onChange={(e) => setTipo(Number(e.target.value) as TipoTransacao)}
+        className="campo"
         >
           <option value={TipoTransacao.Despesa}>Despesa</option>
           <option value={TipoTransacao.Receita}>Receita</option>
@@ -142,6 +147,7 @@ function App() {
         <select
         value={pessoaId}
         onChange={(e) => setPessoaId(e.target.value)}
+        className="campo"
         >
           <option value="">Selecione uma pessoa</option>
           {pessoas.map((pessoa) => (
@@ -150,29 +156,29 @@ function App() {
             </option>
           ))}
         </select>
-        {erroTransacao && <p style={{color: "red"}}>{erroTransacao}</p>}
-        <button type="submit">Cadastrar Transação</button>
+        {erroTransacao && <p className="erro">{erroTransacao}</p>}
+        <button type="submit" className="botao-primario">Cadastrar Transação</button>
       </form>
 
 
-      <ul>
+      <ul className="lista">
         {pessoas.map((pessoa) => (
-          <li key={pessoa.id}>
+          <li key={pessoa.id} className="item-lista">
             {pessoa.nome} - {pessoa.idade} anos 
-            <button onClick={() => handleDeletarPessoa(pessoa.id)}>Excluir</button>
+            <button onClick={() => handleDeletarPessoa(pessoa.id)} className="botao-excluir">Excluir</button>
           </li>
         ))}
       </ul>
 
       {/* chamar todas as transações e pessoas */}
         
-      <button onClick={handleConsultarTotais}>Calcular Totais</button>
+      <button onClick={handleConsultarTotais} className="botao-primario">Calcular Totais</button>
         {relatorio && (
-          <div>
+          <div className="card">
             <h2>Totais por pessoa</h2>
-            <ul>
+            <ul className="lista">
               {relatorio.pessoas.map((pessoa) =>
-              <li key={pessoa.id}>
+              <li key={pessoa.id} className="item-lista">
                 {pessoa.nome} - Receitas: R$ {pessoa.totalReceitas} | Despesas: R$ {pessoa.totalDespesas} | Saldo: R$ {pessoa.saldo}
               </li>
               )}
